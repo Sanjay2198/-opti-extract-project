@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>File History</title>
+    <style>
+      body {
+        font-family: Arial;
+        background-color: #f0f0f0;
+        text-align: center;
+      }
+      h2 {
+        color: #0066cc;
+      }
+      table {
+        width: 90%;
+        margin: auto;
+        border-collapse: collapse;
+        background: white;
+      }
+      th, td {
+        border: 1px solid #ccc;
+        padding: 8px;
+      }
+      th {
+        background-color: #0066cc;
+        color: white;
+      }
+      tr:nth-child(even) {
+        background-color: #f9f9f9;
+      }
+      a {
+        color: #0066cc;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Uploaded Files</h2>
+    <table id="tbl">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Original Filename</th>
+          <th>System Filename</th>
+          <th>Size (bytes)</th>
+          <th>Uploaded At</th>
+          <th>Download</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <script>
+      async function load() {
+        const res = await fetch("/files");
+        const list = await res.json();
+        const tbody = document.querySelector("#tbl tbody");
+        tbody.innerHTML = "";
+        list.forEach((r) => {
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
+            <td>${r.id}</td>
+            <td>${r.original_filename}</td>
+            <td>${r.system_filename}</td>
+            <td>${r.file_size}</td>
+            <td>${new Date(r.uploaded_at).toLocaleString()}</td>
+            <td><a href="/download/${r.system_filename}" target="_blank">Download</a></td>
+          `;
+          tbody.appendChild(tr);
+        });
+      }
+      load();
+    </script>
+  </body>
+</html>

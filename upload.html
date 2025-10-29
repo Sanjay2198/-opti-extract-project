@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Upload File</title>
+    <style>
+      body {
+        font-family: Arial;
+        background-color: #f0f0f0;
+        text-align: center;
+        padding: 40px;
+      }
+      h2 {
+        color: #0066cc;
+      }
+      input, button {
+        padding: 8px;
+        margin: 10px;
+        font-size: 16px;
+      }
+      button {
+        background-color: #0066cc;
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: #004999;
+      }
+      #status {
+        margin-top: 20px;
+        white-space: pre-wrap;
+        text-align: left;
+        display: inline-block;
+        background: white;
+        border: 1px solid #ccc;
+        padding: 10px;
+        width: 80%;
+        border-radius: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Upload a File</h2>
+    <input id="fileInput" type="file" />
+    <button id="uploadBtn">Upload</button>
+    <div id="status"></div>
+
+    <script>
+      document.getElementById("uploadBtn").onclick = async () => {
+        const f = document.getElementById("fileInput").files[0];
+        if (!f) {
+          alert("Please choose a file first!");
+          return;
+        }
+
+        const formData = new FormData();
+        formData.append("file", f);
+
+        document.getElementById("status").textContent = "Uploading...";
+
+        try {
+          const res = await fetch("/upload", { method: "POST", body: formData });
+          const data = await res.json();
+          document.getElementById("status").textContent = JSON.stringify(data, null, 2);
+        } catch (e) {
+          document.getElementById("status").textContent = "❌ Upload failed!";
+        }
+      };
+    </script>
+  </body>
+</html>

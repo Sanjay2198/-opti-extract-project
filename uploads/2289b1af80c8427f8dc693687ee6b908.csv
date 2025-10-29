@@ -1,0 +1,6 @@
+ID,Original Filename,System Filename,Size (bytes),Uploaded At,Download
+1,invoice1.pdf,sys_20251028_001.pdf,25431,2025-10-28 10:15:42,https://example.com/files/sys_20251028_001.pdf
+2,report_summary.docx,sys_20251028_002.docx,54321,2025-10-28 10:17:10,https://example.com/files/sys_20251028_002.docx
+3,receipt.jpg,sys_20251028_003.jpg,18294,2025-10-28 10:20:31,https://example.com/files/sys_20251028_003.jpg
+4,data_sheet.xlsx,sys_20251028_004.xlsx,36781,2025-10-28 10:25:48,https://example.com/files/sys_20251028_004.xlsx
+5,passport_scan.png,sys_20251028_005.png,47851,2025-10-28 10:32:15,https://example.com/files/sys_20251028_005.png
